@@ -3,19 +3,31 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import RoundedButton from '../../components/rounded-button/rounded-button.component';
 
-const Focus = () => {
-    const [focusSubject, setFocusSubject] = useState(null);
+const Focus = ({ addSubject }) => {
+
+    const [tempItem, setTempItem] = useState(null);
 
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}> Não posso procrastinar para?! </Text>
                 <View style={styles.inputContainer}>
-                    <TextInput />
-                    <RoundedButton size={50} title="+"/>
+                    <TextInput
+                        style={{ flex: 1, marginRight: 20 }}
+                        onSubmitEditing={({ nativeEvent }) => {
+                            setTempItem(nativeEvent.text)
+                        }}
+                    />
+                    <RoundedButton
+                        size={50}
+                        title="+"
+                        onPress={() => {
+                            addSubject(tempItem)
+                        }}
+                    />
                 </View>
             </View>
-            
+
         </View>
     )
 }
@@ -27,7 +39,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         flex: 0.5,
         padding: 16,
-        justifyContent: 'center'  
+        justifyContent: 'center'
     },
     title: {
         color: 'white',
@@ -35,7 +47,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     inputContainer: {
-        paddingTop: 20
+        paddingTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
 

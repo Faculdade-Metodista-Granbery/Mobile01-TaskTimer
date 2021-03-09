@@ -14,8 +14,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       { focusSubject ? (
-        <Text> Não posso procrastinar para?! </Text>
-      ) : ( <Focus /> ) }
+        <Text> Meu foco agora é! </Text>
+      ) : (<Focus
+        addSubject={setFocusSubject}
+      />)}
+      { focusSubject }
     </View>
   );
 }

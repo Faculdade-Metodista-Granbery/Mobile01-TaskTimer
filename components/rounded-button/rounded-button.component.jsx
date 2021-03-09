@@ -9,8 +9,14 @@ const RoundedButton = ({
 }) => {
 
     return(
-        <TouchableOpacity style={[styles(size).radius, style, ]}>
-            <Text style={[styles(size).textStyle, textStyle]}>{ otherProps.title }</Text>
+        <TouchableOpacity 
+            style={[styles(size).radius, style, ]}
+            { ...otherProps }
+            >
+            <Text 
+                style={[styles(size).textStyle, textStyle]}>
+                    { otherProps.title }
+            </Text>
         </TouchableOpacity>
     )
 
