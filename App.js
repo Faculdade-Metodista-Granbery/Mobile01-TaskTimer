@@ -13,7 +13,7 @@ import { spacing } from './utils/sizes';
 
 export default function App() {
 
-  const [focusSubject, setFocusSubject] = useState('dsa');
+  const [focusSubject, setFocusSubject] = useState(null);
 
   return (
     <View style={styles.container}>
