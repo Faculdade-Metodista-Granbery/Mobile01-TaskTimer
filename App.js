@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Platform,
-  Text,
 } from 'react-native';
 
 import Focus from './features/focus/Focus';
@@ -14,7 +13,7 @@ import { spacing } from './utils/sizes';
 
 export default function App() {
 
-  const [focusSubject, setFocusSubject] = useState('sonequinha');
+  const [focusSubject, setFocusSubject] = useState('dsa');
 
   return (
     <View style={styles.container}>

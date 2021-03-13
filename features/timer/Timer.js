@@ -15,11 +15,13 @@ const styles = StyleSheet.create({
     title: {
         color: colors.white,
         textAlign: 'center',
+        fontSize: spacing.md,
     },
     task: {
         color: colors.white,
         fontWeight: 'bold',
         textAlign: 'center',
+        fontSize: spacing.md,
     },
     countDown: {
         flex: 0.5,
@@ -85,14 +87,14 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
                     />
             </View>
             <View style={{ paddingTop: spacing.xxxl }}>
-                <Text style={styles.title}> Focusing on: </Text>
+                <Text style={styles.title}> Focado em: </Text>
                 <Text style={styles.task}> {focusSubject} </Text>
             </View>
             <View style={{ paddingTop: spacing.sm }}>
                 <ProgressBar
                     progress={progress}
                     color={colors.lightPurple}
-                    style={{ height: 10 }}
+                    style={{ height: 20, borderRadius: 20, margin: spacing.sm }}
                 />
             </View>
             <View style={styles.buttonWrapper}>
