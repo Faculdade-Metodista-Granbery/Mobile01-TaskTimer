@@ -4,6 +4,7 @@ import { colors } from '../../utils/colors';
 import { spacing } from '../../utils/sizes';
 import CountDown from '../../components/countdown/countdown.component';
 import RoundedButton from '../../components/rounded-button/rounded-button.component';
+import { ProgressBar } from 'react-native-paper';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
 const Timer = ({ focusSubject }) => {
 
     const [isStarted, setIsStarted] = useState(null);
+    const [progress, setProgress] = useState(1);
+
+    const onProgress = (progress) => {
+        setProgress(progress)
+    }
 
     return (
         <View style={styles.container}>
@@ -41,11 +47,18 @@ const Timer = ({ focusSubject }) => {
                 {/* Atenção - 
                 As props do componente devem refletir os casos de uso dele e não do componente que o chama (componente pai), 
                 por isso usamos isStarted no compoenente pai e isPaused no componente filho */}
-                <CountDown isPause={!isStarted} />
+                <CountDown isPause={!isStarted} onProgress={onProgress} />
             </View>
             <View style={{ paddingTop: spacing.xxxl }}>
                 <Text style={styles.title}> Focusing on: </Text>
                 <Text style={styles.task}> {focusSubject} </Text>
+            </View>
+            <View style={{ paddingTop: spacing.sm }}>
+                <ProgressBar
+                    progress={progress}
+                    color={colors.lightPurple}
+                    style={{ height: 10 }}
+                />
             </View>
             <View style={styles.buttonWrapper}>
                 {isStarted ?

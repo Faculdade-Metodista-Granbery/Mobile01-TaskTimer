@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const CountDown = ({ minutes = 20, isPause, }) => {
+const CountDown = ({ minutes = 1, isPause, onProgress }) => {
 
     const interval = useRef(null);
     const countDown = () => {
@@ -26,6 +26,7 @@ const CountDown = ({ minutes = 20, isPause, }) => {
             }
             // O tempo decorrido menos um segundo
             const timeLeft = time - 1000;
+            onProgress(timeLeft / minutesToMillis(minutes))
             return timeLeft;
         })
     }
