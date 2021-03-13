@@ -32,13 +32,17 @@ const CountDown = ({ minutes = 20, isPause, }) => {
 
     const [milis, setMilis] = useState(minutesToMillis(minutes));
 
-    // Força a atualização automatica
+    // Força a atualização automatica sempre que montar o componente
     useEffect(() => {
+        // Se isPause = true não executa o contador
+        if (isPause) {
+            return;
+        }
         interval.current = setInterval(countDown, 1000);
 
         return () => clearInterval(interval.current)
-    }, [])
-
+    }, [isPause])
+    // Executa o useEffect sempre que houver alteração em isPause
 
 
     const minute = Math.floor(milis / 1000 / 60) % 60;
