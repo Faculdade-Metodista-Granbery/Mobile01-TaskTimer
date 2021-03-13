@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../../utils/colors';
 import { spacing } from '../../utils/sizes';
+import CountDown from '../../components/countdown/countdown.component';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,7 +23,8 @@ const Timer = ({ focusSubject }) => {
 
     return(
         <View style={styles.container}>
-            <View style={{ paddingTop: spacing.xxxxl }}>
+            <CountDown />
+            <View style={{ paddingTop: spacing.xxxl }}>
                 <Text style={styles.title}> Focusing on: </Text>
                 <Text style={styles.task}> { focusSubject } </Text>
             </View>
