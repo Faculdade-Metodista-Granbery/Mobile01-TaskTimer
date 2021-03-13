@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import Focus from './features/focus/Focus';
+import { colors } from './utils/colors';
 
 export default function App() {
 
@@ -26,6 +27,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#424549'
+    backgroundColor: colors.darkGray
   },
 });
