@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Platform,
+  Text,
 } from 'react-native';
 
 import Focus from './features/focus/Focus';
@@ -13,16 +14,17 @@ import { spacing } from './utils/sizes';
 
 export default function App() {
 
-  const [focusSubject, setFocusSubject] = useState('studding');
+  const [focusSubject, setFocusSubject] = useState('sonequinha');
 
   return (
     <View style={styles.container}>
       { focusSubject ? (
-        <Timer focusSubject={focusSubject} />
+        <Timer focusSubject={focusSubject} onTimerEnd={() => {
+          setFocusSubject(null)
+        }}/>
       ) : (<Focus
         addSubject={setFocusSubject}
       />)}
-      { focusSubject }
     </View>
   );
 }
