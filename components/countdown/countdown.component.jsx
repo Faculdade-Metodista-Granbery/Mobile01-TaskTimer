@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { colors } from '../../utils/colors';
 import { fontSizes, spacing } from '../../utils/sizes';
@@ -18,7 +18,28 @@ const styles = StyleSheet.create({
 
 const CountDown = ({ minutes = 20, isPause, }) => {
 
+    const interval = useRef(null);
+    const countDown = () => {
+        setMilis((time) => {
+            if (time === 0) {
+                return time;
+            }
+            // O tempo decorrido menos um segundo
+            const timeLeft = time - 1000;
+            return timeLeft;
+        })
+    }
+
     const [milis, setMilis] = useState(minutesToMillis(minutes));
+
+    // Força a atualização automatica
+    useEffect(() => {
+        interval.current = setInterval(countDown, 1000);
+
+        return () => clearInterval(interval.current)
+    }, [])
+
+
 
     const minute = Math.floor(milis / 1000 / 60) % 60;
     const seconds = Math.floor(milis / 1000) %60;
