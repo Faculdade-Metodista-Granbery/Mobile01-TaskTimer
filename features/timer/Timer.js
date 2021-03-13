@@ -5,6 +5,7 @@ import { spacing } from '../../utils/sizes';
 import CountDown from '../../components/countdown/countdown.component';
 import RoundedButton from '../../components/rounded-button/rounded-button.component';
 import { ProgressBar } from 'react-native-paper';
+import Timing from './Timing';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     },
     buttonWrapper: {
         flex: 0.3,
+        flexDirection: 'row',
         padding: spacing.md,
         justifyContent: 'center',
         alignItems: 'center',
@@ -33,13 +35,19 @@ const styles = StyleSheet.create({
 })
 
 const Timer = ({ focusSubject }) => {
-
+    const [minutes, setMinutes] = useState(0.1);
     const [isStarted, setIsStarted] = useState(null);
     const [progress, setProgress] = useState(1);
 
     const onProgress = (progress) => {
-        setProgress(progress)
+        setProgress(progress);
     }
+
+    const onChangeTime = (min) => {
+        setMinutes(min);
+        setProgress(1);
+        setIsStarted(false);
+    } 
 
     return (
         <View style={styles.container}>
@@ -47,7 +55,10 @@ const Timer = ({ focusSubject }) => {
                 {/* Atenção - 
                 As props do componente devem refletir os casos de uso dele e não do componente que o chama (componente pai), 
                 por isso usamos isStarted no compoenente pai e isPaused no componente filho */}
-                <CountDown isPause={!isStarted} onProgress={onProgress} />
+                <CountDown 
+                    minutes={minutes}
+                    isPause={!isStarted}
+                    onProgress={onProgress} />
             </View>
             <View style={{ paddingTop: spacing.xxxl }}>
                 <Text style={styles.title}> Focusing on: </Text>
@@ -59,6 +70,9 @@ const Timer = ({ focusSubject }) => {
                     color={colors.lightPurple}
                     style={{ height: 10 }}
                 />
+            </View>
+            <View style={styles.buttonWrapper}>
+                <Timing onChangeTime={onChangeTime}/>
             </View>
             <View style={styles.buttonWrapper}>
                 {isStarted ?

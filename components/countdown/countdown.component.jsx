@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
 const CountDown = ({ minutes = 1, isPause, onProgress }) => {
 
     const interval = useRef(null);
+    const [milis, setMilis] = useState(minutesToMillis(minutes));
+    
     const countDown = () => {
         setMilis((time) => {
             if (time === 0) {
@@ -30,19 +32,22 @@ const CountDown = ({ minutes = 1, isPause, onProgress }) => {
             return timeLeft;
         })
     }
-
-    const [milis, setMilis] = useState(minutesToMillis(minutes));
-
     // Força a atualização automatica sempre que montar o componente
     useEffect(() => {
+        setMilis(minutesToMillis(minutes))
+
         // Se isPause = true não executa o contador
         if (isPause) {
+            if (interval.current) {
+                clearInterval(interval.current);
+            }
             return;
         }
         interval.current = setInterval(countDown, 1000);
 
         return () => clearInterval(interval.current)
-    }, [isPause])
+
+    }, [isPause, minutes])
     // Executa o useEffect sempre que houver alteração em isPause
 
 
